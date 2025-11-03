@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self' https:;">
+  <title>اتصل بنا | ASQ</title>
+
+  <style>
+    :root{
+      --blue-dark:#0b3a70;--blue:#1565c0;--blue-light:#5aa7ff;
+      --grad:linear-gradient(135deg,#0b3a70 0%,#1565c0 45%,#5aa7ff 100%);
+      --orange:#ff7a1a;--bg:#f3f6fb;--text:#0f172a;--muted:#6b7280;
+      --radius:16px;--shadow:0 12px 28px rgba(2,6,23,.08);
+    }
+
+    /* ===== Sticky Footer Setup ===== */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      font-family: "Cairo", sans-serif;
+      color: var(--text);
+    }
+    main {
+      flex: 1; /* يملأ المساحة بين الهيدر والفوتر */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+    }
+
+    /* ===== محتوى الصفحة ===== */
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; }
+    p.desc { text-align: center; color: var(--muted); margin-bottom: 26px; }
+
+    form { display: grid; gap: 14px; }
+    input, textarea {
+      border: 1px solid #d1d9e6;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 1rem;
+      width: 100%;
+      background: #f9fbff;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+
+    button{
+      border: 0;
+      background: var(--orange);
+      color: #fff;
+      padding: 12px 0;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+    button:hover { background: #e46b0c; }
+
+    .info {
+      margin-top: 28px;
+      font-size: .95rem;
+      text-align: center;
+      color: var(--muted);
+    }
+    .info span { display: block; margin: 4px 0; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- 🧩 سيتم حقن الهيدر هنا -->
+  <div id="asq-header"></div>
+
+  <!-- 🧑‍💻 محتوى الصفحة -->
+  <main role="main">
+    <div class="container">
+      <h1>تواصل معنا</h1>
+      <p class="desc">يسعدنا خدمتك والإجابة على استفساراتك في أسرع وقت ممكن.</p>
+
+      <form action="/send-message" method="post" novalidate>
+        <input type="text" name="name" placeholder="اسمك كاملًا" required>
+        <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+        <input type="tel" name="phone" placeholder="رقم الجوال (اختياري)">
+        <textarea name="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+        <button type="submit">إرسال الرسالة</button>
+      </form>
+
+      <div class="info">
+        <span>📞 الدعم الفني: 9200000000</span>
+        <span>📍 الرياض، المملكة العربية السعودية</span>
+        <span>📧 info@asq.com.sa</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🧩 سيتم حقن الفوتر هنا -->
+  <div id="asq-footer"></div>
+
+  <script>
+    // تحميل القوالب (الهيدر والفوتر)
+    (function(){
+      const load = (id, file) => 
+        fetch(file).then(r => r.text()).then(html => {
+          document.getElementById(id).innerHTML = html;
+        }).catch(() => {
+          document.getElementById(id).innerHTML =
+          '<div style="padding:12px;background:#fee2e2;border:1px solid #fecaca;border-radius:12px">تعذّر تحميل القالب.</div>';
+        });
+
+      load('asq-header', './header.html');
+      load('asq-footer', './footer.html');
+    })();
+  </script>
+
+</body>
+</html>

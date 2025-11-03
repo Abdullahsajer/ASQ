@@ -1,0 +1,151 @@
+<!-- ✅ header.html -->
+<header class="asq-header" role="banner">
+  <!-- الشريط العلوي -->
+  <div class="asq-top">
+    <div class="wrap">
+      <div class="mini">
+        <span>🚚 شحن لجميع المدن</span>
+        <span>📞 دعم فني: 9200000000</span>
+      </div>
+      <div class="mini">
+        <span>مرحبًا بك في <b>ASQ</b> لقطع غيار السيارات</span>
+      </div>
+
+      <!-- زر القائمة للجوال -->
+      <button class="burger" aria-label="فتح القائمة الرئيسية">☰</button>
+    </div>
+  </div>
+
+  <!-- القائمة المنسدلة للجوال -->
+  <nav class="mobile-dropdown" aria-label="القائمة الجوالة">
+    <ul>
+      <li><a href="/">الرئيسية</a></li>
+      <li><a href="/brands">العلامات</a></li>
+      <li><a href="/oem">قطع أصلية</a></li>
+      <li><a href="/offers">العروض</a></li>
+      <li><a href="/contact.html">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <!-- الشريط الأوسط -->
+  <div class="asq-bar">
+    <a class="brand" href="/" aria-label="الصفحة الرئيسية">
+      <div class="logo-circle">
+        <img src="./img/logo.png" alt="شعار ASQ" loading="lazy">
+      </div>
+      <div class="name">
+        <b>ASQ</b>
+        <span class="tag">متجر قطع غيار أصلية</span>
+      </div>
+    </a>
+
+    <!-- البحث -->
+    <div class="search" role="search">
+      <form id="asqSearch" action="/search" method="get" novalidate>
+        <input name="q" id="q" inputmode="search" autocomplete="off" placeholder="ابحث برقم القطعة أو اسمها…" aria-label="بحث">
+        <button type="submit">بحث</button>
+      </form>
+    </div>
+
+    <!-- الأدوات -->
+    <div class="actions">
+      <a class="icon-btn" href="/account">👤 <span>الحساب</span></a>
+      <a class="icon-btn" href="/orders">📦 <span>طلباتي</span></a>
+      <a class="icon-btn" href="/cart">🛒 <span>السلة</span><span class="dot"></span></a>
+    </div>
+  </div>
+
+  <!-- قائمة الكمبيوتر -->
+  <nav class="asq-nav" aria-label="القائمة الرئيسية">
+    <div class="wrap">
+      <ul class="menu">
+        <li><a href="/">الرئيسية</a></li>
+        <li><a href="/brands">العلامات</a></li>
+        <li><a href="/oem">قطع أصلية</a></li>
+        <li><a href="/offers">العروض</a></li>
+        <li><a href="/contact.html">اتصل بنا</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- 🎨 CSS للتصميم -->
+<style>
+:root {
+  --blue-dark:#0b3a70;--blue:#1565c0;--blue-light:#5aa7ff;
+  --grad:linear-gradient(135deg,#0b3a70 0%,#1565c0 45%,#5aa7ff 100%);
+  --orange:#ff7a1a;--text:#0f172a;--muted:#6b7280;
+  --shadow:0 8px 18px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+a{text-decoration:none;color:inherit}
+ul{list-style:none;margin:0;padding:0}
+
+header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:var(--shadow)}
+
+.asq-top{
+  background:var(--grad);color:#fff;font-size:.85rem;position:relative;
+}
+.asq-top .wrap{
+  max-width:1200px;margin:auto;display:flex;align-items:center;
+  justify-content:space-between;padding:8px 16px;
+}
+.asq-top .mini{display:flex;gap:16px;align-items:center}
+.burger{
+  display:none;background:none;border:none;color:#fff;
+  font-size:1.7rem;cursor:pointer;
+}
+
+/* القائمة المنسدلة للجوال */
+.mobile-dropdown{
+  display:none;
+  background:#ffffff;
+  border-bottom:1px solid #e2e8f0;
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transition:max-height .3s ease, opacity .3s ease;
+}
+.mobile-dropdown.open{
+  max-height:240px; /* يظهر العناصر */
+  opacity:1;
+}
+.mobile-dropdown ul{
+  padding:10px 16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.mobile-dropdown a{
+  color:var(--blue-dark);padding:10px;font-weight:600;
+}
+.mobile-dropdown a:hover{
+  background:var(--grad);color:#fff;border-radius:6px;
+}
+
+.asq-bar{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:14px;
+  max-width:1200px;margin:auto;padding:14px 16px;align-items:center;
+}
+.logo-circle{width:52px;height:52px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#fff}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand .tag{font-size:.78rem;color:var(--blue)}
+
+.search form{display:flex;width:100%;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;overflow:hidden}
+.search input{border:0;outline:0;background:transparent;padding:12px 14px;width:100%;font-size:.95rem}
+.search button{background:var(--orange);border:0;color:#fff;padding:0 18px;font-weight:700;cursor:pointer}
+
+.actions{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+
+nav.asq-nav{border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7;background:#ffffffd9}
+nav .wrap{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+.menu{display:flex;gap:10px}
+.menu a{padding:10px 14px;border-radius:10px;font-weight:600;color:var(--blue-dark)}
+.menu a:hover{background:var(--grad);color:#fff}
+
+/* على الجوال */
+@media(max-width:900px){
+  .burger{display:block}
+  .menu{display:none}
+}
+</style>

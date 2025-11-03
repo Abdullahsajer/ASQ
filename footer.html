@@ -1,0 +1,110 @@
+<footer class="asq-footer" role="contentinfo">
+  <div class="top"></div>
+  <div class="wrap">
+    <div class="grid">
+      <!-- عمود 1 -->
+      <div>
+        <h4>عن ASQ</h4>
+        <p>متجر سعودي متخصص في بيع قطع غيار السيارات الأصلية والمتوافقة، مع شحن سريع لجميع المدن وخيارات دفع آمنة.</p>
+        <div class="social" aria-label="روابط اجتماعية">
+          <a class="badge" href="https://www.facebook.com/" target="_blank" rel="noopener">📘 فيسبوك</a>
+          <a class="badge" href="https://www.instagram.com/" target="_blank" rel="noopener">📸 انستجرام</a>
+          <a class="badge" href="https://x.com/" target="_blank" rel="noopener">🕊️ إكس</a>
+        </div>
+      </div>
+
+      <!-- عمود 2 -->
+      <div class="links">
+        <h4>خدمة العملاء</h4>
+        <a href="/help/shipping">الشحن والتسليم</a>
+        <a href="/help/returns">سياسة الإرجاع</a>
+        <a href="/help/warranty">الضمان</a>
+        <a href="/contact">اتصل بنا</a>
+      </div>
+
+      <!-- عمود 3 -->
+      <div class="links">
+        <h4>الأقسام الشائعة</h4>
+        <a href="/c/filters">فلاتر</a>
+        <a href="/c/brakes">فرامل</a>
+        <a href="/c/suspension">نظام التعليق</a>
+        <a href="/c/fluids">زيوت وموائع</a>
+      </div>
+
+      <!-- عمود 4 -->
+      <div class="news">
+        <h4>اشترك في النشرة</h4>
+        <p>عروض حصرية وتخفيضات أسبوعية.</p>
+        <form id="newsForm" method="post" action="/subscribe" novalidate>
+          <input type="email" name="email" id="email" placeholder="بريدك الإلكتروني" required>
+          <button type="submit">اشتراك</button>
+        </form>
+        <small id="newsMsg" aria-live="polite"></small>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <span>© <span id="y"></span> ASQ. جميع الحقوق محفوظة.</span>
+      <div class="badges-wrap">
+        <span class="badge">🔐 دفع آمن</span>
+        <span class="badge">🧾 فواتير مضمونة</span>
+        <span class="badge">📞 دعم 24/7</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const form = document.getElementById('newsForm');
+    const email = document.getElementById('email');
+    const msg = document.getElementById('newsMsg');
+    const y = document.getElementById('y');
+    y.textContent = new Date().getFullYear();
+
+    form.addEventListener('submit', function(e){
+      const val = (email.value||'').trim();
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      if(!ok){
+        e.preventDefault();
+        msg.textContent = 'يرجى إدخال بريد إلكتروني صالح.';
+        msg.style.color = '#ffb4a2';
+        email.focus();
+      }else{
+        msg.textContent = 'تم الاشتراك بنجاح!';
+        msg.style.color = '#9ae6b4';
+      }
+    });
+  })();
+</script>
+
+<style>
+  /* ستايل الفوتر (نفسه السابق لكن بدون <style> داخل <head>) */
+  :root{
+    --blue-dark:#0b3a70;
+    --blue:#1565c0;
+    --blue-light:#5aa7ff;
+    --grad:linear-gradient(135deg,#0b3a70 0%,#1565c0 45%,#5aa7ff 100%);
+    --orange:#ff7a1a;
+    --muted:#9aa3af;
+    --text:#e5e7eb;
+    --shadow:0 8px 18px rgba(0,0,0,.12);
+  }
+  footer.asq-footer{background:#0a1a33;color:var(--text);margin-top:32px}
+  .top{background:var(--grad);height:3px}
+  .wrap{max-width:1200px;margin:auto;padding:28px 16px}
+  .grid{display:grid;gap:20px;grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr}
+  h4{margin:0 0 12px 0;font-size:1.05rem}
+  .links a{display:block;color:#e2e8f0;opacity:.9;margin:8px 0}
+  .links a:hover{opacity:1;text-decoration:underline}
+  .news{background:#0b213f;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+  .news form{display:flex;gap:8px;margin-top:8px}
+  .news input{flex:1;border:0;border-radius:12px;padding:10px 12px}
+  .news button{border:0;border-radius:12px;background:var(--orange);color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}
+  .social{display:flex;gap:10px;margin-top:12px}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#09172d;border:1px solid rgba(255,255,255,.08);padding:10px 12px;border-radius:12px;font-size:.85rem;color:#e2e8f0}
+  .bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:22px;padding-top:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .badges-wrap{display:flex;gap:10px;flex-wrap:wrap}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}.bottom{flex-direction:column;align-items:flex-start}}
+</style>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ✅ تم تعديل سياسة الأمان للسماح بجافاسكربت المضمّنة والمحلية -->
+  <meta http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      img-src 'self' data:;
+      style-src 'self' 'unsafe-inline';
+      script-src 'self' 'unsafe-inline' blob:;
+      base-uri 'self';
+      form-action 'self' https:;
+    ">
+
+  <title>ASQ | متجر قطع غيار السيارات</title>
+  <meta name="description" content="ASQ متجر متخصص لبيع قطع غيار السيارات الأصلية والمتوافقة، شحن سريع ودفع آمن.">
+
+  <style>
+    :root{
+      --blue-dark:#0b3a70;--blue:#1565c0;--blue-light:#5aa7ff;
+      --grad:linear-gradient(135deg,#0b3a70 0%,#1565c0 45%,#5aa7ff 100%);
+      --orange:#ff7a1a;--bg:#f7f9fc;--text:#0f172a;--muted:#64748b;--card:#fff;--radius:16px;--shadow:0 12px 28px rgba(2,6,23,.08);
+    }
+    html,body{background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif;margin:0;padding:0}
+    .container{max-width:1200px;margin:auto;padding:20px 16px}
+    .video-hero{position:relative;height:350px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+    .hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.6)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55));z-index:1}
+    .hero-content{position:relative;z-index:2;color:#fff;text-align:center;padding:0 16px}
+    .hero-content h1{font-size:clamp(1.6rem,3vw,2.4rem);margin:0 0 10px 0}
+    .hero-content p{margin:0 0 16px;opacity:.95}
+    .btn{border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:800;transition:.15s}
+    .btn.primary{background:var(--orange);color:#fff}
+    .btn.ghost{background:#ffffff22;color:#fff;border:1px solid #ffffff55}
+    .btn:hover{transform:translateY(-1px)}
+    @media(max-width:640px){.video-hero{height:250px}}
+    .slider{margin-top:30px;position:relative;overflow:hidden;border-radius:14px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
+    .slides{display:flex;transition:.45s ease}
+    .slide{min-width:100%;padding:26px 18px;text-align:center;color:#fff}
+    .slide:nth-child(1){background:#0b213f}
+    .slide:nth-child(2){background:linear-gradient(135deg,#0b3a70,#1565c0)}
+    .slide:nth-child(3){background:#123257}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+    .dots button{width:10px;height:10px;border-radius:50%;border:0;background:#cbd5e1;cursor:pointer}
+    .dots button.active{background:var(--orange)}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin:26px 0 12px}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e1e5e9;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+    .card .img{height:150px;display:grid;place-items:center;font-size:2.3rem;background:#f4f7ff}
+    .card .body{padding:12px}
+    .price{display:flex;gap:8px;margin-top:6px}
+    .price b{color:var(--blue-dark)}
+    .tag{background:#fff3e8;color:#9a3e00;border:1px solid #ffd3ad;border-radius:999px;padding:2px 10px;font-size:.73rem;font-weight:800}
+    .btn.add-to-cart{background:var(--orange);color:#fff;margin-top:10px;display:inline-block}
+    @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+  <div id="asq-header"></div>
+
+  <main>
+    <!-- بانر الفيديو -->
+    <section class="container">
+      <div class="video-hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+          <source src="./videos/video.mp4" type="video/mp4">
+          متصفحك لا يدعم عرض الفيديو.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1>كل ما تحتاجه من قطع الغيار الأصلية والمتوافقة</h1>
+          <p>ابحث برقم الهيكل أو اسم القطعة واطلبها بسهولة مع شحن سريع.</p>
+          <div class="cta">
+            <a class="btn primary" href="/oem">تصفح القطع الأصلية</a>
+            <a class="btn ghost" href="/offers">أحدث العروض</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- سلايدر -->
+    <section class="container">
+      <div class="slider">
+        <div class="slides" id="slides">
+          <div class="slide"><h3>🛢️ زيوت القير والدفرنس</h3><p>منتجات معتمدة لمختلف المركبات.</p></div>
+          <div class="slide"><h3>📡 حساسات أصلية</h3><p>ضمان استبدال خلال 14 يوم.</p></div>
+          <div class="slide"><h3>🧰 أقمشة وهوبات</h3><p>خصم حتى 25% هذا الأسبوع.</p></div>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </section>
+
+    <!-- الأكثر مبيعًا -->
+    <section class="container">
+      <div class="section-title">
+        <h2>الأكثر مبيعًا</h2>
+        <a class="btn ghost" href="/best">عرض الكل</a>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="img">🛢️</div><div class="body"><h3>زيت دفرنس 75W-90</h3><div class="price"><b>69 ر.س</b><span class="tag">عرض</span></div><a class="btn add-to-cart" href="/p/diff-75w90">أضف للسلة</a></div></article>
+        <article class="card"><div class="img">🛡️</div><div class="body"><h3>فلتر هواء تويوتا OEM</h3><div class="price"><b>55 ر.س</b></div><a class="btn add-to-cart" href="/p/air-oem">أضف للسلة</a></div></article>
+        <article class="card"><div class="img">⚙️</div><div class="body"><h3>حساس أوكسجين أصلي</h3><div class="price"><b>230 ر.س</b></div><a class="btn add-to-cart" href="/p/o2-oem">أضف للسلة</a></div></article>
+        <article class="card"><div class="img">🧰</div><div class="body"><h3>مجموعة أقمشة أمامية</h3><div class="price"><b>170 ر.س</b></div><a class="btn add-to-cart" href="/p/brake-set">أضف للسلة</a></div></article>
+      </div>
+    </section>
+  </main>
+
+  <div id="asq-footer"></div>
+
+  <script>
+    (function(){
+      const load = (id, file, cb) => fetch(file)
+        .then(r => r.text())
+        .then(h => {
+          document.getElementById(id).innerHTML = h;
+          if (typeof cb === "function") cb();
+        })
+        .catch(err => console.error("❌ خطأ أثناء تحميل:", file, err));
+
+      load('asq-header', './header.html', initHeaderMenu);
+      load('asq-footer', './footer.html');
+    })();
+
+    function initHeaderMenu(){
+      const burger = document.querySelector('.burger');
+      const mobileMenu = document.querySelector('.mobile-dropdown');
+      if (burger && mobileMenu){
+        burger.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+      }
+    }
+
+    (function(){
+      const slides=document.getElementById('slides');
+      const dots=document.getElementById('dots');
+      const total=slides.children.length;
+      let idx=0;
+      function renderDots(){
+        for(let i=0;i<total;i++){
+          const b=document.createElement('button');
+          if(i===0)b.classList.add('active');
+          b.onclick=()=>go(i);
+          dots.appendChild(b);
+        }
+      }
+      function go(i){
+        idx=i%total;
+        slides.style.transform=`translateX(-${idx*100}%)`;
+        [...dots.children].forEach((d,k)=>d.classList.toggle('active',k===idx));
+      }
+      renderDots();
+      setInterval(()=>go((idx+1)%total),4500);
+    })();
+  </script>
+</body>
+</html>
+
+
