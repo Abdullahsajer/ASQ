@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASQ | حجز موعد</title>
+
+  <style>
+    :root{
+      --blue-dark:#0b3a70;--blue:#1565c0;--orange:#ff7a1a;
+      --bg:#f7f9fc;--text:#0f172a;--card:#fff;--shadow:0 10px 25px rgba(0,0,0,.07);
+    }
+    body{margin:0;font-family:"Cairo",sans-serif;background:var(--bg);color:var(--text)}
+    .container{max-width:900px;margin:auto;padding:28px 18px}
+    h1{margin:0 0 8px;font-size:2rem;color:var(--blue-dark)}
+    p.lead{margin:0 0 24px;color:#64748b}
+
+    .booking-form{background:var(--card);padding:22px;border-radius:14px;
+      box-shadow:var(--shadow);border:1px solid #e2e8f0}
+    .field{display:flex;flex-direction:column;margin-bottom:16px}
+    .field label{font-weight:700;margin-bottom:6px}
+    .field input,.field select,.field textarea{
+      padding:12px;border:1px solid #d1d5db;border-radius:8px;
+      font-size:1rem;outline:0;background:#fff
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--blue)
+    }
+
+    .btn{padding:12px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;font-size:1rem}
+    .btn.primary{background:var(--orange);color:#fff;width:100%;margin-top:4px}
+    .btn.primary:hover{opacity:.9}
+
+    .success-msg{
+      background:#eaffea;border:1px solid #9cd59c;color:#146c14;
+      padding:14px;border-radius:10px;margin-top:18px;font-weight:700;text-align:center
+    }
+  </style>
+</head>
+
+<body>
+  <div id="asq-header"></div>
+
+  <main>
+    <section class="container">
+      <h1>حجز موعد</h1>
+      <p class="lead">يرجى تعبئة النموذج التالي لحجز موعد لطلب القطع أو الاستشارة الفنية.</p>
+
+      <form id="bookingForm" class="booking-form">
+        <div class="field">
+          <label>الاسم الكامل</label>
+          <input type="text" name="name" required>
+        </div>
+
+        <div class="field">
+          <label>رقم الجوال</label>
+          <input type="tel" name="phone" required placeholder="05xxxxxxxx">
+        </div>
+
+        <div class="field">
+          <label>نوع الحجز</label>
+          <select name="type" required>
+            <option value="">اختر نوع الحجز</option>
+            <option value="oem">طلب قطع أصلية</option>
+            <option value="consult">استشارة فنية</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>التاريخ المطلوب</label>
+          <input type="date" name="date" required>
+        </div>
+
+        <div class="field">
+          <label>ملاحظات إضافية</label>
+          <textarea name="note" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn primary">إرسال الطلب</button>
+      </form>
+
+      <p id="successMsg" class="success-msg" style="display:none;">
+        ✅ تم إرسال طلبك بنجاح، سيتم التواصل معك قريبًا.
+      </p>
+    </section>
+  </main>
+
+  <div id="asq-footer"></div>
+
+  <script>
+    // تحميل الهيدر والفوتر
+    (function(){
+      const load = (id, file, cb) => fetch(file)
+        .then(r => r.text())
+        .then(h => {
+          document.getElementById(id).innerHTML = h;
+          if (typeof cb === "function") cb();
+        });
+
+      load('asq-header', './header.html', initHeaderMenu);
+      load('asq-footer', './footer.html');
+    })();
+
+    // تفعيل القائمة في الجوال
+    function initHeaderMenu(){
+      const burger = document.querySelector('.burger');
+      const mobileMenu = document.querySelector('.mobile-dropdown');
+      if (burger && mobileMenu){
+        burger.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+      }
+    }
+
+    // نموذج الحجز
+    const form = document.getElementById("bookingForm");
+    const msg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      form.reset();
+      msg.style.display = "block";
+      setTimeout(()=>msg.style.display="none",5000);
+    });
+  </script>
+</body>
+</html>

@@ -23,6 +23,7 @@
       <li><a href="/brands">العلامات</a></li>
       <li><a href="/oem">قطع أصلية</a></li>
       <li><a href="/offers">العروض</a></li>
+      <li><a href="/booking.html">حجز موعد</a></li> <!-- ✅ تمت الإضافة -->
       <li><a href="/contact.html">اتصل بنا</a></li>
     </ul>
   </nav>
@@ -63,6 +64,7 @@
         <li><a href="/brands">العلامات</a></li>
         <li><a href="/oem">قطع أصلية</a></li>
         <li><a href="/offers">العروض</a></li>
+        <li><a href="/booking.html">حجز موعد</a></li> <!-- ✅ تمت الإضافة -->
         <li><a href="/contact.html">اتصل بنا</a></li>
       </ul>
     </div>
@@ -96,7 +98,7 @@ header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:v
   font-size:1.7rem;cursor:pointer;
 }
 
-/* القائمة المنسدلة للجوال - تمت إزالة display:none */
+/* القائمة المنسدلة للجوال */
 .mobile-dropdown{
   background:#ffffff;
   border-bottom:1px solid #e2e8f0;
@@ -105,13 +107,13 @@ header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:v
   overflow:hidden;
   max-height:0;
   opacity:0;
-  pointer-events: none;
+  pointer-events:none;
   transition:max-height .3s ease, opacity .3s ease;
 }
 .mobile-dropdown.open{
-  max-height:300px; /* ارتفاع كافٍ للعناصر */
+  max-height:300px;
   opacity:1;
-  pointer-events: auto;
+  pointer-events:auto;
 }
 .mobile-dropdown ul{
   padding:10px 16px;
