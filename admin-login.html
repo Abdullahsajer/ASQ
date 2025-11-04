@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASQ | تسجيل دخول المشرف</title>
+
+  <style>
+    :root{
+      --blue-dark:#0b3a70;--blue:#1565c0;--orange:#ff7a1a;
+      --bg:#f7f9fc;--text:#0f172a;--card:#fff;--shadow:0 10px 25px rgba(0,0,0,.07);
+    }
+    body{margin:0;font-family:"Cairo",sans-serif;background:var(--bg);color:var(--text)}
+    .container{max-width:400px;margin:60px auto;padding:20px}
+    h1{color:var(--blue-dark);text-align:center;margin-bottom:16px}
+    
+    .login-box{background:var(--card);padding:24px;border-radius:14px;
+      box-shadow:var(--shadow);border:1px solid #e2e8f0}
+    .field{margin-bottom:16px;display:flex;flex-direction:column}
+    .field label{font-weight:700;margin-bottom:6px}
+    .field input{padding:12px;border:1px solid #d1d5db;border-radius:8px;font-size:1rem}
+    .field input:focus{outline:none;border-color:var(--blue)}
+
+    .btn{padding:12px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;font-size:1rem;width:100%}
+    .btn.primary{background:var(--orange);color:#fff}
+    .btn.primary:hover{opacity:.9}
+
+    .error-msg{
+      background:#ffecec;border:1px solid #ffb5b5;color:#b30000;
+      padding:12px;border-radius:10px;margin-top:14px;display:none;text-align:center
+    }
+  </style>
+</head>
+
+<body>
+  <div id="asq-header"></div>
+
+  <main>
+    <div class="container">
+      <h1>تسجيل دخول المشرف</h1>
+
+      <div class="login-box">
+        <form id="loginForm" autocomplete="off">
+          <div class="field">
+            <label>البريد الإلكتروني</label>
+            <input type="email" name="email" required placeholder="admin@example.com">
+          </div>
+
+          <div class="field">
+            <label>كلمة المرور</label>
+            <input type="password" name="password" required placeholder="********">
+          </div>
+
+          <button type="submit" class="btn primary">دخول</button>
+        </form>
+
+        <p id="errorMsg" class="error-msg">❌ بيانات الدخول غير صحيحة.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="asq-footer"></div>
+
+  <!-- ✅ تحميل الهيدر والفوتر -->
+  <script>
+    (function(){
+      const load = (id, file, cb) => fetch(file)
+        .then(r => r.text())
+        .then(h => {
+          document.getElementById(id).innerHTML = h;
+          if (typeof cb === "function") cb();
+        });
+
+      load('asq-header', './header.html');
+      load('asq-footer', './footer.html');
+    })();
+  </script>
+
+  <!-- ✅ تفعيل Firebase Authentication -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCz8cp81HkT_tMiSZ3DqfHGeG8jEjQday8",
+      authDomain: "asq-booking-system.firebaseapp.com",
+      projectId: "asq-booking-system",
+      storageBucket: "asq-booking-system.appspot.com",
+      messagingSenderId: "564650359611",
+      appId: "1:564650359611:web:cfd1f48f7a5c52d9a6951e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginForm = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    loginForm.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      errorMsg.style.display = "none";
+
+      const email = loginForm.email.value;
+      const password = loginForm.password.value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "admin-dashboard.html";  // ✅ توجيه بعد الدخول
+      } catch(err){
+        console.error(err);
+        errorMsg.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>
