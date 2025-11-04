@@ -31,10 +31,11 @@
     .btn.primary{background:var(--orange);color:#fff;width:100%;margin-top:4px}
     .btn.primary:hover{opacity:.9}
 
-    .success-msg{
-      background:#eaffea;border:1px solid #9cd59c;color:#146c14;
-      padding:14px;border-radius:10px;margin-top:18px;font-weight:700;text-align:center
+    .success-msg,.error-msg{
+      padding:14px;border-radius:10px;margin-top:18px;font-weight:700;text-align:center;display:none
     }
+    .success-msg{background:#eaffea;border:1px solid #9cd59c;color:#146c14}
+    .error-msg{background:#ffecec;border:1px solid #ffb5b5;color:#b30000}
   </style>
 </head>
 
@@ -46,7 +47,7 @@
       <h1>حجز موعد</h1>
       <p class="lead">يرجى تعبئة النموذج التالي لحجز موعد لطلب القطع أو الاستشارة الفنية.</p>
 
-      <form id="bookingForm" class="booking-form">
+      <form id="bookingForm" class="booking-form" autocomplete="off">
         <div class="field">
           <label>الاسم الكامل</label>
           <input type="text" name="name" required>
@@ -61,8 +62,8 @@
           <label>نوع الحجز</label>
           <select name="type" required>
             <option value="">اختر نوع الحجز</option>
-            <option value="oem">طلب قطع أصلية</option>
-            <option value="consult">استشارة فنية</option>
+            <option value="طلب قطع أصلية">طلب قطع أصلية</option>
+            <option value="استشارة فنية">استشارة فنية</option>
           </select>
         </div>
 
@@ -79,16 +80,15 @@
         <button type="submit" class="btn primary">إرسال الطلب</button>
       </form>
 
-      <p id="successMsg" class="success-msg" style="display:none;">
-        ✅ تم إرسال طلبك بنجاح، سيتم التواصل معك قريبًا.
-      </p>
+      <p id="successMsg" class="success-msg">✅ تم إرسال طلبك بنجاح، سيتم التواصل معك قريبًا.</p>
+      <p id="errorMsg" class="error-msg">❌ حدث خطأ أثناء الإرسال، تأكد من اتصال الإنترنت</p>
     </section>
   </main>
 
   <div id="asq-footer"></div>
 
+  <!-- ✅ تحميل الهيدر والفوتر -->
   <script>
-    // تحميل الهيدر والفوتر
     (function(){
       const load = (id, file, cb) => fetch(file)
         .then(r => r.text())
@@ -101,7 +101,6 @@
       load('asq-footer', './footer.html');
     })();
 
-    // تفعيل القائمة في الجوال
     function initHeaderMenu(){
       const burger = document.querySelector('.burger');
       const mobileMenu = document.querySelector('.mobile-dropdown');
@@ -109,17 +108,53 @@
         burger.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
       }
     }
+  </script>
 
-    // نموذج الحجز
+  <!-- ✅ ربط Firebase + Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } 
+      from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCz8cp81HkT_tMiSZ3DqfHGeG8jEjQday8",
+      authDomain: "asq-booking-system.firebaseapp.com",
+      projectId: "asq-booking-system",
+      storageBucket: "asq-booking-system.appspot.com",
+      messagingSenderId: "564650359611",
+      appId: "1:564650359611:web:cfd1f48f7a5c52d9a6951e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
     const form = document.getElementById("bookingForm");
-    const msg = document.getElementById("successMsg");
+    const success = document.getElementById("successMsg");
+    const error = document.getElementById("errorMsg");
 
-    form.addEventListener("submit", function(e){
+    form.addEventListener("submit", async (e)=>{
       e.preventDefault();
-      form.reset();
-      msg.style.display = "block";
-      setTimeout(()=>msg.style.display="none",5000);
+      success.style.display = "none";
+      error.style.display = "none";
+
+      try {
+        await addDoc(collection(db,"bookings"), {
+          name: form.name.value,
+          phone: form.phone.value,
+          type: form.type.value,
+          date: form.date.value,
+          note: form.note.value,
+          createdAt: serverTimestamp()
+        });
+
+        form.reset();
+        success.style.display = "block";
+      } catch(err){
+        console.error(err);
+        error.style.display = "block";
+      }
     });
   </script>
+
 </body>
 </html>
