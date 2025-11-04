@@ -96,9 +96,8 @@ header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:v
   font-size:1.7rem;cursor:pointer;
 }
 
-/* القائمة المنسدلة للجوال */
+/* القائمة المنسدلة للجوال - تمت إزالة display:none */
 .mobile-dropdown{
-  display:none;
   background:#ffffff;
   border-bottom:1px solid #e2e8f0;
   position:relative;
@@ -106,21 +105,23 @@ header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:v
   overflow:hidden;
   max-height:0;
   opacity:0;
+  pointer-events: none;
   transition:max-height .3s ease, opacity .3s ease;
 }
 .mobile-dropdown.open{
-  max-height:240px; /* يظهر العناصر */
+  max-height:300px; /* ارتفاع كافٍ للعناصر */
   opacity:1;
+  pointer-events: auto;
 }
 .mobile-dropdown ul{
   padding:10px 16px;
   display:flex;flex-direction:column;gap:10px;
 }
 .mobile-dropdown a{
-  color:var(--blue-dark);padding:10px;font-weight:600;
+  color:var(--blue-dark);padding:10px;font-weight:600;border-radius:6px;
 }
 .mobile-dropdown a:hover{
-  background:var(--grad);color:#fff;border-radius:6px;
+  background:var(--grad);color:#fff;
 }
 
 .asq-bar{

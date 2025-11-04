@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ✅ تم تعديل سياسة الأمان للسماح بجافاسكربت المضمّنة والمحلية -->
+  <!-- سياسة الأمان وتقييدات المحتوى -->
   <meta http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
@@ -22,7 +22,8 @@
     :root{
       --blue-dark:#0b3a70;--blue:#1565c0;--blue-light:#5aa7ff;
       --grad:linear-gradient(135deg,#0b3a70 0%,#1565c0 45%,#5aa7ff 100%);
-      --orange:#ff7a1a;--bg:#f7f9fc;--text:#0f172a;--muted:#64748b;--card:#fff;--radius:16px;--shadow:0 12px 28px rgba(2,6,23,.08);
+      --orange:#ff7a1a;--bg:#f7f9fc;--text:#0f172a;--muted:#64748b;
+      --card:#fff;--radius:16px;--shadow:0 12px 28px rgba(2,6,23,.08);
     }
     html,body{background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif;margin:0;padding:0}
     .container{max-width:1200px;margin:auto;padding:20px 16px}
@@ -126,6 +127,7 @@
       load('asq-footer', './footer.html');
     })();
 
+    // التحكم في القائمة الجوالة
     function initHeaderMenu(){
       const burger = document.querySelector('.burger');
       const mobileMenu = document.querySelector('.mobile-dropdown');
@@ -134,6 +136,7 @@
       }
     }
 
+    // سلايدر العروض
     (function(){
       const slides=document.getElementById('slides');
       const dots=document.getElementById('dots');
@@ -158,5 +161,3 @@
   </script>
 </body>
 </html>
-
-
