@@ -10,7 +10,18 @@
       --blue-dark:#0b3a70;--blue:#1565c0;--orange:#ff7a1a;
       --bg:#f7f9fc;--text:#0f172a;--card:#fff;--shadow:0 10px 25px rgba(0,0,0,.07);
     }
-    body{margin:0;font-family:"Cairo",sans-serif;background:var(--bg);color:var(--text)}
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+    }
     .container{max-width:400px;margin:60px auto;padding:20px}
     h1{color:var(--blue-dark);text-align:center;margin-bottom:16px}
     
@@ -76,7 +87,7 @@
     })();
   </script>
 
-  <!-- ✅ تفعيل Firebase Authentication -->
+  <!-- ✅ Firebase Auth -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } 
@@ -106,7 +117,7 @@
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "admin-dashboard.html";  // ✅ توجيه بعد الدخول
+        window.location.href = "admin-dashboard.html";
       } catch(err){
         console.error(err);
         errorMsg.style.display = "block";
