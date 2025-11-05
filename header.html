@@ -23,7 +23,7 @@
       <li><a href="/brands">العلامات</a></li>
       <li><a href="/oem">قطع أصلية</a></li>
       <li><a href="/offers">العروض</a></li>
-      <li><a href="/booking.html">حجز موعد</a></li> <!-- ✅ تمت الإضافة -->
+      <li><a href="/booking.html">حجز موعد</a></li>
       <li><a href="/contact.html">اتصل بنا</a></li>
     </ul>
   </nav>
@@ -64,14 +64,14 @@
         <li><a href="/brands">العلامات</a></li>
         <li><a href="/oem">قطع أصلية</a></li>
         <li><a href="/offers">العروض</a></li>
-        <li><a href="/booking.html">حجز موعد</a></li> <!-- ✅ تمت الإضافة -->
+        <li><a href="/booking.html">حجز موعد</a></li>
         <li><a href="/contact.html">اتصل بنا</a></li>
       </ul>
     </div>
   </nav>
 </header>
 
-<!-- 🎨 CSS للتصميم -->
+<!-- 🎨 CSS -->
 <style>
 :root {
   --blue-dark:#0b3a70;--blue:#1565c0;--blue-light:#5aa7ff;
@@ -130,9 +130,23 @@ header.asq-header{position:sticky;top:0;z-index:100;background:#fff;box-shadow:v
   display:grid;grid-template-columns:1fr auto 1fr;gap:14px;
   max-width:1200px;margin:auto;padding:14px 16px;align-items:center;
 }
-.logo-circle{width:52px;height:52px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#fff}
+.logo-circle{
+  width:60px;height:60px;border-radius:50%;
+  overflow:hidden;display:grid;place-items:center;
+  background:#fff;border:2px solid #e5e7eb;
+}
+.logo-circle img{
+  width:100%;height:100%;object-fit:contain; /* ✅ يحافظ على التناسب ويظهر الصورة بالكامل */
+  display:block;
+}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-.brand .tag{font-size:.78rem;color:var(--blue)}
+.brand .tag{
+  font-size:.78rem;color:var(--blue);
+  border:1px solid #ffecd2;
+  background:#fff8f3;
+  padding:3px 10px;
+  border-radius:20px;
+}
 
 .search form{display:flex;width:100%;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;overflow:hidden}
 .search input{border:0;outline:0;background:transparent;padding:12px 14px;width:100%;font-size:.95rem}
